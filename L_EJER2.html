@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+    <style>
+        #map {
+            width: 100%;
+            height: 580px;
+            box-shadow: 5px 5px 5px #888;
+        }
+    </style>
+    <script src=" https://unpkg.com/leaflet@1.6.0/dist/leaflet.js "></script>
+    <link rel="stylesheet" href=" https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+
+</head>
+
+
+<body>
+    <div id='map'>
+    </div>
+    <script>
+        var OSM = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>'
+                + 'contributors',
+            maxZoom: 18
+        });
+
+
+        var map = L.map('map', {
+            center: [1.6183539176511965, -75.60882109864093],/* coordenadas defecto*/
+            layers: OSM,
+            zoom: 14,/* zoom por defecto*/
+        });
+        L.control.scale().addTo(map);
+
+        //<<<<<<<La universidad de la amazonia >>>>>//
+
+        var marker = L.marker([1.6200121, -75.6044208], {
+            draggable: true, title: 'pincha aqui'
+        }).addTo(map)
+            .bindPopup('universidad de la amazonia')
+            .openPopup();
+
+        //<<<<<La alcaldia de florencia>>>>>/
+
+
+        var circle = L.circle([1.614913, -75.613794], 50, {
+            color: 'red',
+            fillColor: '#f03',
+            fillOpacity: 0.5
+        }).addTo(map);
+
+        circle.bindPopup("Alcaldia de Florencia Caqueta");
+
+        //<<<<< La Plaza >>>>>//
+        var polygon = L.polygon([
+        [1.615195, -75.613763],
+        [1.615448, -75.613001],
+        [1.614723, -75.612783],
+        [1.614481, -75.613566]
+        ]).addTo(map)
+            .bindPopup('Plaza Santander');
+
+        //<<<<< La Ruta de la Universidad >>>>>//
+
+
+        var point1 = new L.LatLng(1.627591, -75.590133);
+        var point2 = new L.LatLng(1.629638, -75.590496);
+        var point3 = new L.LatLng(1.628397, -75.597529);
+        var point4 = new L.LatLng(1.623474, -75.601688);
+        var point5 = new L.LatLng(1.621893, -75.604304);
+        var point6 = new L.LatLng(1.6201022633807132, -75.60422083414291);
+       
+
+
+        var latlngs = [point1, point2, point3, point4, point5, point6];
+        var polyline = L.polyline(
+            latlngs, { color: 'red' }
+        )
+            .addTo(map)
+            .bindPopup('RTA. Juan Galindo');
+
+
+        
+
+    </script>
+</body>
+
+</html>
