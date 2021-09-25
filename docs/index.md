@@ -1,37 +1,90 @@
-## Welcome to GitHub Pages
+<!DOCTYPE html>
+<html >
 
-You can use the [editor on GitHub](https://github.com/galindowski9/L_EJER2/edit/main/docs/index.md) to maintain and preview the content for your website in Markdown files.
+<head>
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+    <style>
+        #map {
+            width: 100%;
+            height: 580px;
+            box-shadow: 5px 5px 5px #888;
+        }
+    </style>
+    <script src=" https://unpkg.com/leaflet@1.6.0/dist/leaflet.js "></script>
+    <link rel="stylesheet" href=" https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
 
-### Markdown
+</head>
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
 
-```markdown
-Syntax highlighted code block
+<body>
+    <div id='map'>
+    </div>
+    <script>
+        var OSM = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>'
+                + 'contributors',
+            maxZoom: 18
+        });
 
-# Header 1
-## Header 2
-### Header 3
 
-- Bulleted
-- List
+        var map = L.map('map', {
+            center: [1.6183539176511965, -75.60882109864093],/* coordenadas defecto*/
+            layers: OSM,
+            zoom: 14,/* zoom por defecto*/
+        });
+        L.control.scale().addTo(map);
 
-1. Numbered
-2. List
+        //<<<<<<<La universidad de la amazonia >>>>>//
 
-**Bold** and _Italic_ and `Code` text
+        var marker = L.marker([1.6200121, -75.6044208], {
+            draggable: true, title: 'pincha aqui'
+        }).addTo(map)
+            .bindPopup('universidad de la amazonia')
+            .openPopup();
 
-[Link](url) and ![Image](src)
-```
+        //<<<<<La alcaldia de florencia>>>>>/
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
 
-### Jekyll Themes
+        var circle = L.circle([1.614913, -75.613794], 50, {
+            color: 'red',
+            fillColor: '#f03',
+            fillOpacity: 0.5
+        }).addTo(map);
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/galindowski9/L_EJER2/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+        circle.bindPopup("Alcaldia de Florencia Caqueta");
 
-### Support or Contact
+        //<<<<< La Plaza >>>>>//
+        var polygon = L.polygon([
+        [1.615195, -75.613763],
+        [1.615448, -75.613001],
+        [1.614723, -75.612783],
+        [1.614481, -75.613566]
+        ]).addTo(map)
+            .bindPopup('Plaza Santander');
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+        //<<<<< La Ruta de la Universidad >>>>>//
+
+
+        var point1 = new L.LatLng(1.627591, -75.590133);
+        var point2 = new L.LatLng(1.629638, -75.590496);
+        var point3 = new L.LatLng(1.628397, -75.597529);
+        var point4 = new L.LatLng(1.623474, -75.601688);
+        var point5 = new L.LatLng(1.621893, -75.604304);
+        var point6 = new L.LatLng(1.6201022633807132, -75.60422083414291);
+       
+
+
+        var latlngs = [point1, point2, point3, point4, point5, point6];
+        var polyline = L.polyline(
+            latlngs, { color: 'red' }
+        )
+            .addTo(map)
+            .bindPopup('RTA. Juan Galindo');
+
+
+        
+
+    </script>
+</body>
+
+</html>
