@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TALLER4 - CIUDADES DEL MUNDO</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script type="text/javascript" src="paises.js"></script>
+    <script type="text/javascript" src="ciudades.js"></script>
+    </script>
+
+</head>
+
+
+<body>
+    <div id='map'>
+    </div>
+    <script>
+        var map = L.map('map', {
+            center: [1.615692, -75.615549],
+            zoom: 4,
+            layers: osm,
+            scrollWheelZoom: true,
+        });
+
+        L.control.scale().addTo(map); 
+
+        var osm = new L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+            maxZoom: 18
+        }).addTo(map);
+
+        L.geoJson(countries,
+            {
+                style: style,
+                onEachFeature: popup
+            }).addTo(map);
+        
+        
+        L.geoJson(cities,
+        {
+            pointToLayer: pointToLayer,
+            onEachFeature: popupCity
+        }).addTo(map)
+
+        var title = L.control();
+        title.onAdd = function (map) {
+            var div = L.DomUtil.create('div', 'info');
+            div.innerHTML +=
+                '<h2>PAISES Y SUS CIUDADES CON CAPITALES</h2>JUAN CAMILO GALINDO'; return div;
+        };
+            title.addTo(map);
+       
+    </script>
+</body>
+</script>
+
+<style>
+    #map {
+    width: 100%;
+    height: 800px;
+    box-shadow: 5px 5px 5px #000;
+    }
+    .info {
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+    }
+    .info h2 {
+    margin: 0 0 5px;
+    color: #777;
+    }
+    </style>
+
+</html>
